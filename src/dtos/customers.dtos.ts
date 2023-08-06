@@ -8,7 +8,7 @@ export class CreateCustomerDto {
 
   @IsBoolean()
   @IsNotEmpty()
-  readonly suscribed: boolean;
+  readonly subscribed: boolean;
 
   @IsDateString()
   @IsNotEmpty()

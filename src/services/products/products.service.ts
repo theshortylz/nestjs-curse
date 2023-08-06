@@ -55,7 +55,6 @@ export class ProductsService {
 
   delete(id: number) {
     const index = this.products.findIndex((item) => item.id === id);
-    console.log(index);
     if (index === -1) {
       throw new NotFoundException(`Product with id ${id} not found.`);
     }

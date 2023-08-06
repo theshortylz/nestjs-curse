@@ -16,13 +16,8 @@ import { CreateProductDto, UpdateProductDto } from 'src/dtos/products.dtos';
 export class ProductsController {
   constructor(private productsService: ProductsService) {}
 
-  @Get('filter')
-  getProductFilter() {
-    return `Filter`;
-  }
-
   @Get(':productId')
-  getProduct(@Param('productId', ParseIntPipe) productId: number) {
+  getProductById(@Param('productId', ParseIntPipe) productId: number) {
     // return {
     //   messsage: `product ${productId}`,
     //   productId: productId,
@@ -33,7 +28,7 @@ export class ProductsController {
   }
 
   @Get()
-  getProducts() {
+  getAllProducts() {
     // const { limit, offset } = params;
     // return {
     //   message: `Products: limit_${limit}, offset_${offset}, brand_${brand}`,
@@ -48,7 +43,7 @@ export class ProductsController {
   }
 
   @Post()
-  create(@Body() payload: CreateProductDto) {
+  createProduct(@Body() payload: CreateProductDto) {
     // return {
     //   message: 'Create Action',
     //   payload,
@@ -57,7 +52,7 @@ export class ProductsController {
   }
 
   @Put(':id')
-  update(@Param('id') id: number, @Body() payload: UpdateProductDto) {
+  updateProduct(@Param('id') id: number, @Body() payload: UpdateProductDto) {
     // return {
     //   id,
     //   payload,
@@ -67,7 +62,7 @@ export class ProductsController {
   }
 
   @Delete(':id')
-  delete(@Param('id', ParseIntPipe) id: number) {
-    this.productsService.delete(id);
+  deleteProduct(@Param('id', ParseIntPipe) id: number) {
+    return this.productsService.delete(id);
   }
 }

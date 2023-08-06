@@ -20,34 +20,34 @@ export class BrandsService {
   }
 
   findOne(id: number) {
-    const product = this.brands.find((item) => item.id === id);
-    if (!product) {
+    const brand = this.brands.find((item) => item.id === id);
+    if (!brand) {
       throw new NotFoundException(`Brand with id ${id} not found.`);
     }
 
-    return product;
+    return brand;
   }
 
   create(payload: CreateBrandDto) {
     this.counterId++;
 
-    const newProduct = {
+    const newBrand = {
       id: this.counterId,
       ...payload,
     };
-    this.brands.push(newProduct);
-    return newProduct;
+    this.brands.push(newBrand);
+    return newBrand;
   }
 
   update(id: number, payload: UpdateBrandDto) {
-    const product = this.findOne(id);
-    if (!product) {
+    const brand = this.findOne(id);
+    if (!brand) {
       return null;
     }
 
     const index = this.brands.findIndex((item) => item.id === id);
     this.brands[index] = {
-      ...product,
+      ...brand,
       ...payload,
     };
   }

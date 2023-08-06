@@ -1,7 +1,7 @@
 export class Customer {
   id: number;
   userId: number;
-  suscribed: boolean;
+  subscribed: boolean;
   lastPurchase: string;
   totalPurchases: number;
 }

@@ -25,6 +25,14 @@ import { CategoriesService } from './services/categories/categories.service';
     UsersController,
     CustomersController,
   ],
-  providers: [AppService, ProductsService, CustomersService, OrdersService, BrandsService, UsersService, CategoriesService],
+  providers: [
+    AppService,
+    ProductsService,
+    CustomersService,
+    OrdersService,
+    BrandsService,
+    UsersService,
+    CategoriesService,
+  ],
 })
 export class AppModule {}
