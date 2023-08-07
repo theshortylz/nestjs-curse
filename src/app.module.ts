@@ -1,38 +1,32 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
+import * as Joi from 'joi';
+
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { ProductsService } from './services/products/products.service';
-import { ProductsController } from './controllers/products/products.controller';
-import { CategoriesController } from './controllers/categories/categories.controller';
-import { BrandsController } from './controllers/brands/brands.controller';
-import { OrdersController } from './controllers/orders/orders.controller';
-import { UsersController } from './controllers/users/users.controller';
-import { CustomersController } from './controllers/customers/customers.controller';
-import { CustomersService } from './services/customers/customers.service';
-import { OrdersService } from './services/orders/orders.service';
-import { BrandsService } from './services/brands/brands.service';
-import { UsersService } from './services/users/users.service';
-import { CategoriesService } from './services/categories/categories.service';
+import { ProductsModule } from './products/products.module';
+import { UsersModule } from './users/users.module';
+import { DatabaseModule } from './database/database.module';
+import { enviroments } from 'src/enviroments';
+import config from './config';
 
 @Module({
-  imports: [],
-  controllers: [
-    AppController,
-    ProductsController,
-    CategoriesController,
-    BrandsController,
-    OrdersController,
-    UsersController,
-    CustomersController,
+  imports: [
+    ProductsModule,
+    UsersModule,
+    DatabaseModule,
+    ConfigModule.forRoot({
+      envFilePath: enviroments[process.env.NODE_ENV] || '.env',
+      load: [config],
+      isGlobal: true,
+      validationSchema: Joi.object({
+        API_KEY: Joi.number().required(),
+        DATABASE_NAME: Joi.string().required(),
+        DATABASE_PORT: Joi.number().required(),
+      }),
+    }),
   ],
-  providers: [
-    AppService,
-    ProductsService,
-    CustomersService,
-    OrdersService,
-    BrandsService,
-    UsersService,
-    CategoriesService,
-  ],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}

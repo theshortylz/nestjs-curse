@@ -19,4 +19,9 @@ export class AppController {
   Hello() {
     return 'con / slash /';
   }
+
+  @Get('/api')
+  getDataFromExternAPI(): string {
+    return this.appService.getHello();
+  }
 }
